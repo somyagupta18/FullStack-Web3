@@ -18,13 +18,24 @@ async function getTransactions() {
   const transactions = (await Moralis.Web3API.account.getNFTTransfers(options)).result;
 
   transactions.forEach(function (transaction) {
+
+    //to show the gas price of each transaction
+    // const url = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=" + transaction.transaction_hash;
+    // fetch(url)
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   div.innerHTML += "<h6><b> Gas price: </b>"+parseInt(data.result.gasPrice,16)/1e18+" ether</h6>";
+    // console.log(data);
+
     // append transaction details
     div.innerHTML += `<h6><b>Transaction hash:</b><br><a href='https://etherscan.io/tx/${transaction.transaction_hash}' target="_blank">${transaction.transaction_hash}</a></h6>`;
     div.innerHTML += "<h6><b>From:</b> " + transaction.from_address + "</h6>";
     div.innerHTML += "<h6><b>To:</b> " + transaction.to_address + "</h6>";
     div.innerHTML += "<h6><b>Timestamp:</b> " + transaction.block_timestamp + "</h6>";
     div.innerHTML += "<p><hr><br></p>";
-  });
+
+    });
+  // });
 }
 
 // Fetch acccount Balance
